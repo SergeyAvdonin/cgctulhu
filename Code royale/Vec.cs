@@ -107,7 +107,28 @@ namespace Code_cutulu
             return (b - this).Length();
         }
 
-        [Pure]
+	    [Pure]
+	    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+	    public int ManhDistTo(Vec b)
+	    {
+		    return Math.Abs(b.X - X) + Math.Abs(b.Y - Y);
+	    }
+
+	    [Pure]
+	    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+	    public Vec[] GetNeighboursAndItselfManh()
+	    {
+		    return new Vec[]
+		    {
+			    this,
+			    new Vec(X - 1, Y),
+			    new Vec(X + 1, Y),
+			    new Vec(X, Y - 1),
+			    new Vec(X, Y + 1),
+		    };
+	    }
+
+		[Pure]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int SquaredDistTo(Vec b)
         {

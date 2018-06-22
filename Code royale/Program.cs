@@ -50,20 +50,38 @@ namespace Code_cutulu
                 {
                     inputs = Console.ReadLine().Split(' ');
                     string entityType = inputs[0];
-
-                    if (entityType == "EXPLORER")
+	                int id = int.Parse(inputs[1]);
+	                int x = int.Parse(inputs[2]);
+	                int y = int.Parse(inputs[3]);
+	                int param0 = int.Parse(inputs[4]);
+	                int param1 = int.Parse(inputs[5]);
+	                int param2 = int.Parse(inputs[6]);
+					if (entityType == "EXPLORER")
                     {
-                        int id = int.Parse(inputs[1]);
-                        int x = int.Parse(inputs[2]);
-                        int y = int.Parse(inputs[3]);
-                        int param0 = int.Parse(inputs[4]);
-                        int param1 = int.Parse(inputs[5]);
-                        int param2 = int.Parse(inputs[6]);
-                    }
+                        var explorer = new Explorer(new Vec(x,y));
+						explorer.Id = id;
+	                    explorer.Sanity = param0;
+	                    if (i == 0)
+	                    {
+		                    currentState.MyExplorer = explorer;
+	                    }
+	                    else
+	                    {
+							currentState.OtherExplorers.Add(explorer);
+						}
+					}
 
-                    
-                    //Console.Error.WriteLine(inputs);
-                }
+	                if (entityType == "WANDERER")
+	                {
+		                var wanderer = new Wanderer(new Vec(x, y));
+		                wanderer.Id = id;
+		                wanderer.TimeBeforeRecall = param0;
+		                currentState.Wanderers.Add(wanderer);
+					}
+
+					
+					//Console.Error.WriteLine(inputs);
+				}
 
                 // Write an action using Console.WriteLine()
                 // To debug: Console.Error.WriteLine("Debug messages...");

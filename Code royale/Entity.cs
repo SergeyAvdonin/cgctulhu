@@ -10,10 +10,12 @@ namespace Code_royale
     public class Entity
     {
         public Vec Pos;
+        public int Id;
 
         public Entity(Vec pos)
         {
             Pos = pos;
         }
+
     }
 }

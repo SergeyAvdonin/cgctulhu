@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Code_cutulu;
 
 namespace Code_royale
 {
@@ -15,7 +16,9 @@ namespace Code_royale
 
         public List<Wanderer> Wanderers;
 
-        public List<Explorer> Explorers;
+        public List<Explorer> OtherExplorers;
+
+	    public Explorer MyExplorer;
 
         public State Copy()
         {
@@ -32,6 +35,27 @@ namespace Code_royale
             
             return copy;
         }
+
+	    public int GetPotentialFor(Vec targetPos)
+	    {
+		    if (MyExplorer == null)
+				throw new Exception("null explorer");
+		    var maxDist = Map.GetLength(0) + Map.GetLength(1);
+		    var result = 0;
+
+		    foreach (var otherExplorer in OtherExplorers)
+		    {
+			    if (targetPos.ManhDistTo(otherExplorer.Pos) < 2)
+				    result += 10;
+				else if (targetPos.ManhDistTo(otherExplorer.Pos) == 2)
+				    result += 5;
+			    else
+					//улучшить
+				    result += (maxDist - targetPos.ManhDistTo(otherExplorer.Pos)) / 20;
+			}
+
+		    return result;
+	    }
     }
 
     public enum CellType

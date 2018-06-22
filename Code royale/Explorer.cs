@@ -10,5 +10,9 @@ namespace Code_royale
     public class Explorer : Entity
     {
         public int Sanity;
+
+	    public Explorer(Vec pos) : base(pos)
+	    {
+	    }
     }
 }
